@@ -25,5 +25,4 @@ steps:
       - --env-vars-file=.env.yaml
       - --min-instances=0
       - --max-instances=1
-      - --force 
     dir: '.'
