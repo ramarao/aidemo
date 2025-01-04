@@ -17,3 +17,4 @@ steps:
       - --trigger-http
       - --entry-point=chat
       - --allow-unauthenticated
+      - --service-account=aidemo-446807@appspot.gserviceaccount.com
