@@ -1,13 +1,32 @@
 options:
   logging: CLOUD_LOGGING_ONLY
 steps:
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  args:
-    - gcloud
-    - functions
-    - deploy
-    - chat
-    - --runtime=python39
-    - --trigger-http
-    - --entry-point=chat
-    - --allow-unauthenticated
+  # Install dependencies
+  - name: python
+    entrypoint: pip
+    args: ["install", "-r", "requirements.txt", "--user"]
+
+  # Run tests (if you have them)
+  - name: python
+    entrypoint: python
+    args: ["-m", "pytest", "-v"]
+    
+  # Lint the code
+  - name: python
+    entrypoint: pip
+    args: ["install", "flake8", "--user"]
+  - name: python
+    entrypoint: python
+    args: ["-m", "flake8", "--max-line-length=120"]
+
+  # Deploy if all tests pass
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args:
+      - gcloud
+      - functions
+      - deploy
+      - chat
+      - --runtime=python39
+      - --trigger-http
+      - --entry-point=chat
+      - --allow-unauthenticated
