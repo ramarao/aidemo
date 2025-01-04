@@ -2,3 +2,4 @@ flask==3.1.0
 openai==1.59.3
 python-dotenv==1.0.1
 functions-framework==3.*
+gunicorn==20.1.0

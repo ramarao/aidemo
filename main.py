@@ -13,4 +13,5 @@ def chat(request):
     Returns:
         The response from your Flask app
     """
-    return app(request.environ, lambda x, y: y) 
+    with app.request_context(request.environ):
+        return app(request.environ, lambda x, y: y) 
