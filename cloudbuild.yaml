@@ -1,13 +1,13 @@
-
 options:
   logging: CLOUD_LOGGING_ONLY
 steps:
-- name: gcr.io/cloud-builders/gcloud
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
-  - functions
-  - deploy
-  - anu
-  - --runtime
-  - python310
-  - --trigger-http
-  - --allow-unauthenticated
+    - gcloud
+    - functions
+    - deploy
+    - chat
+    - --runtime=python39
+    - --trigger-http
+    - --entry-point=chat
+    - --allow-unauthenticated
