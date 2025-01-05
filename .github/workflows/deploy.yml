@@ -21,7 +21,7 @@ jobs:
 
       - name: Deploy Function
         run: |
-          gcloud functions deploy anu-ai-chat 
+          gcloud functions deploy anu 
             --runtime python39 
             --trigger-http 
             --entry-point chat 
