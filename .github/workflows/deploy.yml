@@ -1,0 +1,33 @@
+name: Deploy to Cloud Functions
+
+on:
+  push:
+    branches:
+      - main  # or your preferred branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Deploy Function
+        run: |
+          gcloud functions deploy anu-ai-chat 
+            --runtime python39 
+            --trigger-http 
+            --entry-point chat 
+            --source . 
+            --region us-central1 
+            --project aidemo-446807
+            --env-vars-file=.env.yaml
+            --min-instances=0
+            --max-instances=1
