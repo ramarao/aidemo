@@ -3,7 +3,7 @@ name: Deploy to Cloud Functions
 on:
   push:
     branches:
-      - main  # or your preferred branch
+      - main
 
 jobs:
   deploy:
@@ -21,13 +21,13 @@ jobs:
 
       - name: Deploy Function
         run: |
-          gcloud functions deploy anu 
-            --runtime python39 
-            --trigger-http 
-            --entry-point chat 
-            --source . 
-            --region us-central1 
-            --project aidemo-446807
-            --env-vars-file=.env.yaml
-            --min-instances=0
+          gcloud functions deploy anu \
+            --runtime python39 \
+            --trigger-http \
+            --entry-point chat \
+            --source . \
+            --region us-central1 \
+            --project aidemo-446807 \
+            --env-vars-file=.env.yaml \
+            --min-instances=0 \
             --max-instances=1
